@@ -4,8 +4,7 @@
 import { Button } from '@heroui/button'
 import { Drawer, DrawerContent, DrawerHeader } from '@heroui/drawer'
 import { Select, SelectItem } from '@heroui/select'
-
-import { useState } from 'react'
+import { useDisclosure } from '@heroui/use-disclosure'
 
 const lang = [
   { key: 'uk', label: 'uk' },
@@ -14,7 +13,7 @@ const lang = [
 
 //component
 const HomeComponent = () => {
-  const [isOpen, setIsOpen] = useState(false)
+  const { isOpen, onOpen, onOpenChange } = useDisclosure()
 
   // return
   return (
@@ -30,11 +29,11 @@ const HomeComponent = () => {
           zIndex: 100,
         }}
       >
-        <Button variant={'bordered'} onPress={() => setIsOpen(!isOpen)}>
+        <Button variant={'bordered'} onPress={onOpen}>
           Btn open/close drawer (ui)
         </Button>
 
-        <button style={{ border: '1px solid black' }} onClick={() => setIsOpen(!isOpen)}>
+        <button style={{ border: '1px solid black' }} onClick={onOpen}>
           Btn open/close drawer (my)
         </button>
 
@@ -49,7 +48,7 @@ const HomeComponent = () => {
 
       <div className={'pt-80 text-3xl'}>Page</div>
 
-      <Drawer isOpen={isOpen} placement={'top'}>
+      <Drawer isOpen={isOpen} placement={'top'} onOpenChange={onOpenChange}>
         <DrawerContent className={'pt-80'}>
           <DrawerHeader className='flex flex-col gap-1'>Menu</DrawerHeader>
         </DrawerContent>
