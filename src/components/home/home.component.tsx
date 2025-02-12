@@ -13,7 +13,7 @@ const lang = [
 
 //component
 const HomeComponent = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure()
 
   // return
   return (
@@ -29,7 +29,7 @@ const HomeComponent = () => {
           zIndex: 100,
         }}
       >
-        <Button variant={'bordered'} onPress={onOpen}>
+        <Button variant={'bordered'} onPress={isOpen ? onClose : onOpen}>
           Btn open/close drawer (ui)
         </Button>
 
@@ -48,7 +48,7 @@ const HomeComponent = () => {
 
       <div className={'pt-80 text-3xl'}>Page</div>
 
-      <Drawer isOpen={isOpen} placement={'top'} onOpenChange={onOpenChange}>
+      <Drawer isOpen={isOpen} placement={'top'} onOpenChange={onOpenChange} isDismissable={false}>
         <DrawerContent className={'pt-80'}>
           <DrawerHeader className='flex flex-col gap-1'>Menu</DrawerHeader>
         </DrawerContent>
